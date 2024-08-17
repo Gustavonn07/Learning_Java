@@ -5,7 +5,6 @@ public class IMC_Calculator {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in).useLocale(Locale.US);
-
         System.out.println("Insira seu peso: ");
         double weight = input.nextDouble();
 
@@ -15,6 +14,5 @@ public class IMC_Calculator {
 
         double imc = weight / Math.pow(height, 2);
         System.out.printf("Seu IMC é de: %.2f%n", imc);
-
     }
 }
