@@ -1,4 +1,4 @@
-package model;
+package sect1_model;
 
 import java.time.LocalDate;
 

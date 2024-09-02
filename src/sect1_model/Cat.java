@@ -1,4 +1,4 @@
-package model;
+package sect1_model;
 
 public class Cat extends Pet{
 
