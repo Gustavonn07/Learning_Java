@@ -6,11 +6,15 @@ import java.time.LocalDate;
 
 public class Person {
     private String firstName;
-    private String middleName = "Nepomuceno";
+    private String middleName;
     public String lastName;
     protected LocalDate dob;
     public static final double PI = 3.14;
     public static int[] nums = initNums();
+
+    Person(String middleName) {
+        this.middleName = middleName;
+    }
 
     // Não é muito legivel, mas funciona como inicializador estático
     //    static {
@@ -38,6 +42,7 @@ public class Person {
 
     public void sayHello() {
         System.out.println("Hello");
+        System.out.println(this.middleName);
     }
 
     public static void saySomething(String text) {
@@ -66,7 +71,7 @@ public class Person {
     }
 
     public static void main(String[] args) {
-        Person gustavo = new Person();
+        Person gustavo = new Person("Nepomuceno");
         gustavo.sayHello();
 
         System.out.println(gustavo.getMiddleInitial());
@@ -77,7 +82,6 @@ public class Person {
         System.out.println(args.length);
         System.out.println(PI);
     }
-
 
     /* private final String FIANCE = "Fernanda";
     private final double PI_2N = 3.14;
