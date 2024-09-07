@@ -1,4 +1,4 @@
-package random.JavaFX;
+package random.JavaFX.CasaDoCodigo;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import random.JavaFX.CasaDoCodigo.Vitrine.Vitrine_App;
 
 import javax.swing.*;
 
@@ -79,8 +80,16 @@ public class Login_App extends Application {
     }
 
     private void openApplication() {
-        if(txLogin.getText().equals("admin") && txPassword.getText().equals("senhaforte")) {
-            // TODO Abrir tela vitrineApp
+        if(txLogin.getText().equals("admin") &&
+                txPassword.getText().equals("senhaforte")) {
+            try {
+                Vitrine_App vitrineApp = new Vitrine_App();
+                vitrineApp.start(new Stage());
+                Login_App.getStage().close();
+
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
         } else {
             JOptionPane.showMessageDialog(
                     null,
@@ -89,10 +98,6 @@ public class Login_App extends Application {
                     JOptionPane.ERROR_MESSAGE
             );
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     @Override
@@ -109,5 +114,9 @@ public class Login_App extends Application {
         initLayout();
         Login_App.stage = stage;
 
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

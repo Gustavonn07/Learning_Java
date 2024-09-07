@@ -3,6 +3,8 @@ module Learning.Java {
     requires javafx.controls;
     requires java.desktop;
 
-    opens random.JavaFX.Login;
+    opens random;
     opens random.JavaFX;
+    opens random.JavaFX.CasaDoCodigo;
+    opens random.JavaFX.CasaDoCodigo.Vitrine;
 }
