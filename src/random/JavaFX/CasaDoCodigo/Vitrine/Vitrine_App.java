@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import random.JavaFX.CasaDoCodigo.Item.Item_App;
 
 public class Vitrine_App extends Application {
     private AnchorPane pane;
@@ -19,8 +20,7 @@ public class Vitrine_App extends Application {
     private TableView<ItensProperty> tbVitrine;
     private TableColumn<ItensProperty, String> columnProduct;
     private TableColumn<ItensProperty, Double> columnPrice;
-    private static ObservableList<ItensProperty> listItens = FXCollections
-            .observableArrayList();
+    private static ObservableList<ItensProperty> listItens = FXCollections.observableArrayList();
     private static Vitrine_Cart cart;
 
     private void initComponents() {
@@ -32,7 +32,7 @@ public class Vitrine_App extends Application {
         txSearch.setLayoutY(10);
         txSearch.setLayoutX(640);
 
-        tbVitrine = new TableView<ItensProperty>();
+        tbVitrine = new TableView<>();
         tbVitrine.setPrefSize(780, 550);
         tbVitrine.setLayoutY(40);
         tbVitrine.setLayoutX(10);
@@ -60,7 +60,7 @@ public class Vitrine_App extends Application {
                 new Vitrine_Product("Caneleira Topper", 10.00)
         );
 
-        for(Vitrine_Product p : v.getProducts())
+        for (Vitrine_Product p : v.getProducts())
             listItens.add(new ItensProperty(p.getProduct(), p.getPrice()));
 
         tbVitrine.setItems(listItens);
@@ -78,13 +78,26 @@ public class Vitrine_App extends Application {
                 }
             }
         });
+
+        tbVitrine.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldItem, newItem) -> {
+            Item_App.setProduct(new Vitrine_Product(newItem.getProduct(), newItem.getPrice()));
+            Item_App.setIndex(tbVitrine.getSelectionModel().getSelectedIndex());
+
+            try {
+                new Item_App().start(new Stage());
+
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
+        });
     }
 
     private ObservableList<ItensProperty> findItens() {
         ObservableList<ItensProperty> foundItens = FXCollections.observableArrayList();
 
-        for(ItensProperty itens : listItens)
-            if(itens.getProduct().contains(txSearch.getText())) foundItens.add(itens);
+        for (ItensProperty itens : listItens)
+            if (itens.getProduct().contains(txSearch.getText())) foundItens.add(itens);
 
         return foundItens;
     }
@@ -101,41 +114,29 @@ public class Vitrine_App extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     public class ItensProperty {
-        private SimpleStringProperty product;
-        private SimpleDoubleProperty price;
+        private final SimpleStringProperty PRODUCT;
+        private final SimpleDoubleProperty PRICE;
 
-        public ItensProperty(String product, double price) {
-            this.product = new SimpleStringProperty(product);
-            this.price = new SimpleDoubleProperty(price);
+        public ItensProperty(String PRODUCT, double PRICE) {
+            this.PRODUCT = new SimpleStringProperty(PRODUCT);
+            this.PRICE = new SimpleDoubleProperty(PRICE);
         }
 
         public String getProduct() {
-            return product.get();
+            return PRODUCT.get();
         }
 
-        public void setProduct(String product) {
-            this.product.set(product);
+        public void setProduct(String PRODUCT) {
+            this.PRODUCT.set(PRODUCT);
         }
 
         public double getPrice() {
-            return price.get();
+            return PRICE.get();
         }
 
-        public void setPrice(double price) {
-            this.price.set(price);
+        public void setPrice(double PRICE) {
+            this.PRICE.set(PRICE);
         }
-
-        //  public SimpleStringProperty productProperty() {
-        //      return product;
-        //  }
-
-        //  public SimpleDoubleProperty priceProperty() {
-        //      return price;
-        //  }
     }
 }

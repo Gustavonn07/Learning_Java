@@ -9,19 +9,19 @@ public class Vitrine_Product {
         this.price = price;
     }
 
-    protected String getProduct() {
+    public String getProduct() {
         return product;
     }
 
-    protected void setProduct(String product) {
+    public void setProduct(String product) {
         this.product = product;
     }
 
-    protected double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    protected void setPrice(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

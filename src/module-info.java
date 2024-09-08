@@ -7,4 +7,5 @@ module Learning.Java {
     opens random.JavaFX;
     opens random.JavaFX.CasaDoCodigo;
     opens random.JavaFX.CasaDoCodigo.Vitrine;
+    opens random.JavaFX.CasaDoCodigo.Item;
 }

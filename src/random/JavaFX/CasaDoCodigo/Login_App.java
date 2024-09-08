@@ -44,16 +44,16 @@ public class Login_App extends Application {
 
         double paneWidth = pane.getWidth();
 
-        txLogin.setLayoutX((paneWidth - txLogin.getWidth()) / 3);
+        txLogin.setLayoutX(paneWidth / 2 - 80);
         txLogin.setLayoutY(70);
 
-        txPassword.setLayoutX((paneWidth - txPassword.getWidth()) / 3);
+        txPassword.setLayoutX(paneWidth / 2 - 80);
         txPassword.setLayoutY(110);
 
-        btnJoin.setLayoutX((paneWidth - txLogin.getWidth()) / 3);
+        btnJoin.setLayoutX(paneWidth / 2 - 80);
         btnJoin.setLayoutY(150);
 
-        btnLeave.setLayoutX((paneWidth - txLogin.getWidth()) / 2 - 20);
+        btnLeave.setLayoutX(paneWidth / 2 - 30);
         btnLeave.setLayoutY(150);
     }
 
