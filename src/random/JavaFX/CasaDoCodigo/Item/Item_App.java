@@ -8,7 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import random.JavaFX.CasaDoCodigo.Cart.Cart_App;
+import random.JavaFX.CasaDoCodigo.Vitrine.Vitrine_App;
 import random.JavaFX.CasaDoCodigo.Vitrine.Vitrine_Product;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class Item_App extends Application {
     private AnchorPane pane;
@@ -27,28 +32,7 @@ public class Item_App extends Application {
             "https://img.freepik.com/fotos-gratis/ferramentas-esportivas_53876-138077.jpg"
     };
 
-    public static Stage getStage() {
-        return stage;
-    }
-
-    public static Vitrine_Product getProduct() {
-        return product;
-    }
-
-    public static void setProduct(Vitrine_Product product) {
-        Item_App.product = product;
-    }
-
-    public static int getIndex() {
-        return index;
-    }
-
-    public static void setIndex(int index) {
-        Item_App.index = index;
-    }
-
-    @Override
-    public void start(Stage stage) {
+    private void initComponents() {
         pane = new AnchorPane();
         pane.setPrefSize(600, 400);
 
@@ -72,6 +56,47 @@ public class Item_App extends Application {
         btnAddCart.setLayoutY(290);
 
         pane.getChildren().addAll(imgItem, lbPrice, lbDescription, btnAddCart);
+    }
+
+    private void initListeners() {
+        btnAddCart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent arg0) {
+                Vitrine_App.cart.addProducts(product);
+                try {
+                    new Cart_App().start(new Stage());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static Vitrine_Product getProduct() {
+        return product;
+    }
+
+    public static void setProduct(Vitrine_Product product) {
+        Item_App.product = product;
+    }
+
+    public static int getIndex() {
+        return index;
+    }
+
+    public static void setIndex(int index) {
+        Item_App.index = index;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        initComponents();
+        initListeners();
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);

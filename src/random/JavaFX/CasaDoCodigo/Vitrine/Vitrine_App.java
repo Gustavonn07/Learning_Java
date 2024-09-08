@@ -21,7 +21,7 @@ public class Vitrine_App extends Application {
     private TableColumn<ItensProperty, String> columnProduct;
     private TableColumn<ItensProperty, Double> columnPrice;
     private static ObservableList<ItensProperty> listItens = FXCollections.observableArrayList();
-    private static Vitrine_Cart cart;
+    public static Vitrine_Cart cart;
 
     private void initComponents() {
         pane = new AnchorPane();
@@ -114,7 +114,7 @@ public class Vitrine_App extends Application {
         stage.show();
     }
 
-    public class ItensProperty {
+    public static class ItensProperty {
         private final SimpleStringProperty PRODUCT;
         private final SimpleDoubleProperty PRICE;
 

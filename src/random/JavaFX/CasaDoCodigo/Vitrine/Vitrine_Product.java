@@ -4,7 +4,7 @@ public class Vitrine_Product {
     private String product;
     private double price;
 
-    protected Vitrine_Product(String product, double price) {
+    public Vitrine_Product(String product, double price) {
         this.product = product;
         this.price = price;
     }
