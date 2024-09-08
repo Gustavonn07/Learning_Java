@@ -19,16 +19,12 @@ public class Item_App extends Application {
     private static Vitrine_Product product;
     private static int index;
     private static String[] images = {
-            "http://www.sportcenterlopes.com.br/images/" +
-                    "250_topper_campo_2009replic.jpg",
-            "http://1.bp.blogspot.com/_H8uGs8K8kaY/TLZTXR8nIgI/" +
-                    "AAAAAAAAF_0/BvpxdqGF4PE/s1600/luva_umbro.png",
-            "http://bimg2.mlstatic.com/camisa-nike-active-importada-manga-" +
-                    "longa-esportiva-vermelha_MLB-F-199843960_1391.jpg",
-            "http://www.showtenis.com.br/images/_product/979/979112/" +
-                    "chuteira-nike-mercurial-glide-3-fg-campo--199fd9.jpg",
-            "http://www.katy.com.br/imagens/produtos/original/" +
-                    "caneleira-topper-trainning-difusion-13340619502673137.jpg"
+            // Em um projeto real, trocar as fotos pela imagens do produto:
+            "https://img.freepik.com/fotos-gratis/ferramentas-esportivas_53876-138077.jpg",
+            "https://img.freepik.com/fotos-gratis/ferramentas-esportivas_53876-138077.jpg",
+            "https://img.freepik.com/fotos-gratis/ferramentas-esportivas_53876-138077.jpg",
+            "https://img.freepik.com/fotos-gratis/ferramentas-esportivas_53876-138077.jpg",
+            "https://img.freepik.com/fotos-gratis/ferramentas-esportivas_53876-138077.jpg"
     };
 
     public static Stage getStage() {
@@ -58,11 +54,22 @@ public class Item_App extends Application {
 
         imgItem = new ImageView();
         imgItem.setImage(new Image(images[index]));
+        imgItem.setFitWidth(300);
+        imgItem.setFitHeight(180);
+        imgItem.setX(150);
+        imgItem.setY(20);
 
-        lbPrice = new Label("Price: " + product.getPrice());
-        lbDescription = new Label("Description: " + product.getProduct());
+        lbDescription = new Label(product.getProduct());
+        lbDescription.setLayoutX(240);
+        lbDescription.setLayoutY(230);
+
+        lbPrice = new Label(product.getPrice() + " ");
+        lbPrice.setLayoutX(240);
+        lbPrice.setLayoutY(250);
 
         btnAddCart = new Button("Add to Cart");
+        btnAddCart.setLayoutX(260);
+        btnAddCart.setLayoutY(290);
 
         pane.getChildren().addAll(imgItem, lbPrice, lbDescription, btnAddCart);
 

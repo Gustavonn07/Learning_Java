@@ -37,8 +37,8 @@ public class Vitrine_App extends Application {
         tbVitrine.setLayoutY(40);
         tbVitrine.setLayoutX(10);
 
-        columnProduct = new TableColumn<ItensProperty, String>();
-        columnPrice = new TableColumn<ItensProperty, Double>();
+        columnProduct = new TableColumn<ItensProperty, String>("Product");
+        columnPrice = new TableColumn<ItensProperty, Double>("Price");
         tbVitrine.getColumns().addAll(columnProduct, columnPrice);
         pane.getChildren().addAll(txSearch, tbVitrine);
 
