@@ -59,10 +59,14 @@ public class Item_App extends Application {
     }
 
     private void initListeners() {
+
         btnAddCart.setOnAction(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent arg0) {
+
                 Vitrine_App.cart.addProducts(product);
+
                 try {
                     new Cart_App().start(new Stage());
 
@@ -102,5 +106,7 @@ public class Item_App extends Application {
         stage.setScene(scene);
         stage.setTitle("Item Details");
         stage.show();
+
+        Item_App.stage = stage;
     }
 }

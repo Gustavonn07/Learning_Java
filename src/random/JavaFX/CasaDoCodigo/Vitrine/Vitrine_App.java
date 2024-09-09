@@ -138,5 +138,13 @@ public class Vitrine_App extends Application {
         public void setPrice(double PRICE) {
             this.PRICE.set(PRICE);
         }
+
+        public SimpleStringProperty PRODUCTProperty() {
+            return PRODUCT;
+        }
+
+        public SimpleDoubleProperty PRICEProperty() {
+            return PRICE;
+        }
     }
 }

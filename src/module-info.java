@@ -8,4 +8,5 @@ module Learning.Java {
     opens random.JavaFX.CasaDoCodigo;
     opens random.JavaFX.CasaDoCodigo.Vitrine;
     opens random.JavaFX.CasaDoCodigo.Item;
+    opens random.JavaFX.CasaDoCodigo.Cart;
 }

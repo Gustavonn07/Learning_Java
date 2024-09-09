@@ -2,19 +2,15 @@ package random.JavaFX.CasaDoCodigo.Cart;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import random.JavaFX.CasaDoCodigo.Item.Item_App;
 import random.JavaFX.CasaDoCodigo.Vitrine.Vitrine_App;
-
-import javafx.scene.control.*;
 import random.JavaFX.CasaDoCodigo.Vitrine.Vitrine_Product;
-
-import javax.swing.*;
 
 public class Cart_App extends Application {
     private AnchorPane pane;
@@ -22,67 +18,77 @@ public class Cart_App extends Application {
     private TableColumn<Vitrine_App.ItensProperty, String> columnProduct;
     private TableColumn<Vitrine_App.ItensProperty, Double> columnPrice;
     private Button btnDeleteItem, btnBackVitrine, btnConfirmPurchase;
-    private static ObservableList<Vitrine_App.ItensProperty> listItems;
+    private ObservableList<Vitrine_App.ItensProperty> listItens = FXCollections.observableArrayList();
     private static Stage stage;
 
     private void initItems() {
-        for (Vitrine_Product p : Vitrine_App.cart.getProducts())
-            listItems.add(new Vitrine_App.ItensProperty(p.getProduct(), p.getPrice()));
+        listItens.clear();
+        for (Vitrine_Product p : Vitrine_App.cart.getProducts()) {
+            listItens.add(new Vitrine_App.ItensProperty(p.getProduct(), p.getPrice()));
+        }
     }
 
     private void initComponents() {
         pane = new AnchorPane();
         pane.setPrefSize(600, 400);
+
+        tbCart = new TableView<>();
+        tbCart.setItems(listItens);
+        tbCart.setPrefSize(400, 300);
+        tbCart.setLayoutX(50);
+        tbCart.setLayoutY(50);
+
+        columnProduct = new TableColumn<>("Produto");
+        columnProduct.setCellValueFactory(cellData -> cellData.getValue().PRODUCTProperty());
+
+        columnPrice = new TableColumn<>("Preço");
+        columnPrice.setCellValueFactory(cellData -> cellData.getValue().PRICEProperty().asObject());
+
+        tbCart.getColumns().addAll(columnProduct, columnPrice);
+
+        btnDeleteItem = new Button("Delete Item");
+        btnDeleteItem.setLayoutX(50);
+        btnDeleteItem.setLayoutY(360);
+
+        btnConfirmPurchase = new Button("Confirm Purchase");
+        btnConfirmPurchase.setLayoutX(150);
+        btnConfirmPurchase.setLayoutY(360);
+
+        btnBackVitrine = new Button("Back to Vitrine");
+        btnBackVitrine.setLayoutX(300);
+        btnBackVitrine.setLayoutY(360);
+
+        pane.getChildren().addAll(tbCart, btnDeleteItem, btnConfirmPurchase, btnBackVitrine);
     }
 
     private void initListeners() {
-        btnDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent arg0) {
-                Vitrine_App.cart.deleteProduct(new Vitrine_Product(tbCart
-                        .getSelectionModel().getSelectedItem().getProduct(),
-                        tbCart.getSelectionModel().getSelectedItem().getPrice()));
-
-                tbCart.getItems().remove(
-                        tbCart.getSelectionModel().getSelectedItem());
+        btnDeleteItem.setOnAction(event -> {
+            Vitrine_App.ItensProperty selectedItem = tbCart.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                Vitrine_App.cart.deleteProduct(new Vitrine_Product(selectedItem.getProduct(), selectedItem.getPrice()));
+                tbCart.getItems().remove(selectedItem);
             }
         });
 
-        btnBackVitrine.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Cart_App.getStage().close();
-                Item_App.getStage().close();
-            }
+        btnBackVitrine.setOnAction(event -> {
+            Cart_App.getStage().close();
+            Item_App.getStage().close();
         });
 
-        btnConfirmPurchase.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                Thread thread = new Thread() {
-                    public void run() {
-                        try {
-                            sleep(5000);
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        JOptionPane.showMessageDialog(null,
-                                "Compra realizada com sucesso!");
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                Cart_App.getStage().close();
-                                Item_App.getStage().close();
-                            }
-                        });
-                    };
-                };
-                thread.start();
-            }
+        btnConfirmPurchase.setOnAction(event -> {
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Platform.runLater(() -> {
+                    new Alert(Alert.AlertType.INFORMATION, "Compra realizada com sucesso!").showAndWait();
+                    Cart_App.getStage().close();
+                    Item_App.getStage().close();
+                });
+            });
+            thread.start();
         });
     }
 
@@ -92,13 +98,13 @@ public class Cart_App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Cart_App.stage = stage;
         initComponents();
         initItems();
         initListeners();
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        stage.setTitle("Item Details");
         stage.show();
     }
 }
