@@ -27,7 +27,7 @@ public class Login_App extends Application {
     private void initComponents() {
         pane = new AnchorPane();
         pane.setPrefSize(400, 300);
-        pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #C6C6FF 0%, #C6FFC6 100%);");
+        pane.getStyleClass().add("pane");
 
         txLogin = new TextField();
         txLogin.setPromptText("Digite aqui o seu login");
@@ -36,7 +36,10 @@ public class Login_App extends Application {
         txPassword.setPromptText("Digite aqui a sua senha");
 
         btnJoin = new Button("Join");
+        btnJoin.getStyleClass().addAll("btn", "join");
+
         btnLeave = new Button("Leave");
+        btnLeave.getStyleClass().addAll("btn", "leave");
     }
 
     private void initLayout() {
@@ -106,6 +109,8 @@ public class Login_App extends Application {
         initListeners();
 
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add("random/JavaFX/CasaDoCodigo/Login.css");
+
         stage.setResizable(false);
         stage.setTitle("Login - GolFX");
         stage.setScene(scene);

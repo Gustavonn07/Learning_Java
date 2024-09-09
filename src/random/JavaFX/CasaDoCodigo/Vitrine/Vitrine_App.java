@@ -10,7 +10,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import random.JavaFX.CasaDoCodigo.Item.Item_App;
 
@@ -28,6 +30,10 @@ public class Vitrine_App extends Application {
         pane.setPrefSize(800, 600);
 
         txSearch = new TextField();
+        DropShadow ds = new DropShadow();
+        ds.setSpread(0.5);
+        ds.setColor(Color.RED);
+        txSearch.setEffect(ds);
         txSearch.setPromptText("Digite o item para pesquisa");
         txSearch.setLayoutY(10);
         txSearch.setLayoutX(640);

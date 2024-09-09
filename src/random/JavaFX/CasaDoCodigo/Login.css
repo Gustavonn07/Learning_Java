@@ -1,0 +1,19 @@
+.pane {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #C6C6FF 0%, #C6FFC6 100%);
+}
+
+.btn {
+    -fx-cursor: hand;
+    -fx-transition: fade;
+    -fx-transition-duration: 150ms;
+}
+
+.join:hover {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.leave:hover {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}

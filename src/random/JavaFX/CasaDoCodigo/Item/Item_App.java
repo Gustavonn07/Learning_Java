@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -40,6 +42,7 @@ public class Item_App extends Application {
         imgItem.setImage(new Image(images[index]));
         imgItem.setFitWidth(300);
         imgItem.setFitHeight(180);
+        imgItem.setEffect(new Reflection());
         imgItem.setX(150);
         imgItem.setY(20);
 
@@ -52,6 +55,7 @@ public class Item_App extends Application {
         lbPrice.setLayoutY(250);
 
         btnAddCart = new Button("Add to Cart");
+        btnAddCart.setEffect(new InnerShadow());
         btnAddCart.setLayoutX(260);
         btnAddCart.setLayoutY(290);
 
